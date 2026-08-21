@@ -1,4 +1,4 @@
-import flet as ft #Importacion
+import flet as ft
 import flet_video as ftv
 
 from screens.screen1 import screen1Contenido
@@ -7,55 +7,94 @@ from screens.screen3 import screen3Contenido
 from screens.screen4 import screen4Contenido
 
 
-def main(page: ft.Page): #Funcion Principal
+def main(page: ft.Page):
 
-    page.appbar=ft.AppBar(title="Aplicaciones Moviles",bgcolor="green")
+    
+    page.title = "Aplicaciones Móviles"
 
-    selectId=0
+    page.appbar = ft.AppBar(
+        title=ft.Text("Aplicaciones Móviles"),
+        bgcolor="green"
+    )
 
-    contenido=ft.Container(expand=True)
+    
+    selectId = 0
 
+    
+    contenido = ft.Container(
+        expand=True
+    )
+
+    
     def cambiarPantalla(e):
-        nonlocal selectId
-        selectId=e.control.selected_index
-        if selectId==0:
-            pantalla=screen1Contenido(page)
-        elif selectId==1:
-            pantalla=screen2Contenido(page)
-        elif selectId==2:
-            pantalla=screen3Contenido(page)
-        elif selectId==3:
-            pantalla=screen4Contenido(page)
 
-        contenido.content=pantalla
+        nonlocal selectId
+
+        
+        selectId = e.control.selected_index
+
+        print("Pantalla seleccionada:", selectId)
+
+        # Seleccionar contenido
+        if selectId == 0:
+            pantalla = screen1Contenido(page)
+
+        elif selectId == 1:
+            pantalla = screen2Contenido(page)
+
+        elif selectId == 2:
+            pantalla = screen3Contenido(page)
+
+        elif selectId == 3:
+            pantalla = screen4Contenido(page)
+
+        # Cambiar contenido
+        contenido.content = pantalla
+
+        # Actualizar página
         page.update()
 
-    page.bottom_appbar=ft.NavigationBar(
+    
+    navigation = ft.NavigationBar(
+        selected_index=0,
+
+        on_change=cambiarPantalla,
+
         destinations=[
             ft.NavigationBarDestination(
-                icon=ft.Icons.HOME, 
+                icon=ft.Icons.HOME,
                 label="Inicio"
-                ),
+            ),
+
             ft.NavigationBarDestination(
                 icon=ft.Icons.TIKTOK,
                 label="Redes"
             ),
+
             ft.NavigationBarDestination(
                 icon=ft.Icons.FACE,
                 label="Perfil"
             ),
+
             ft.NavigationBarDestination(
                 icon=ft.Icons.GPS_FIXED,
-                label="Ubicacion"
+                label="Ubicación"
             )
         ],
+
         bgcolor="green"
     )
+
+    contenido.content=screen1Contenido(page)
+   
     
-    page.add( #Interfaz
-        contenido
-       
+
+ 
+    page.add(
+        contenido,
+        navigation
     )
 
 
-ft.run(main) #Ejecución
+# EJECUTAR
+ft.run(main)
