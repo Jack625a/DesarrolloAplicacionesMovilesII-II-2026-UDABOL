@@ -3,18 +3,17 @@ import flet_audio as fta
 
 
 def screen2Contenido(page:ft.Page):
-    
-
-
     audio=fta.Audio(
-        src="https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3",
-        autoplay=True
+        src="app/src/screens/audio.mp3",
+        autoplay=False
     )
 
-    async def reproducir():
+    page.services.append(audio)
+    
+    async def reproducir(e):
         await audio.play()
 
-    async def pausar():
+    async def pausar(e):
         await audio.pause()
 
     
