@@ -10,9 +10,6 @@ async def screen3Contenido(page: ft.Page):
     )
 
     seleccionarCamara=ft.Dropdown(label="Seleccione la Camara",width=300)
-    
-
-    estado = ft.Text("Buscando cámara...")
 
     async def cargarCamaras(e:None):
         # Obtener cámaras
